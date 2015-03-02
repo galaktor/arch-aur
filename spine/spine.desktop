@@ -1,12 +1,13 @@
 [Desktop Entry]
 Version=1.0
 Name=Spine2D
+GenericName=Animation Editor
 Type=Application
-Comment=Spine is an animation tool that focuses specifically on 2D animation for games
-Exec=/usr/bin/spine
-TryExec=/usr/bin/spine
-Path=/usr/lib/spine
+Comment=Create and edit 2D animations
+Exec=spine
+TryExec=/usr/local/bin/spine
+Path=/usr/local/lib/spine
 Terminal=false
 StartupNotify=false
-Icon=/usr/lib/spine/spine.png
+Icon=/usr/local/lib/spine/spine-icon.png
 Categories=Development;Graphics;Video;IDE;2DGraphics;RasterGraphics;ImageProcessing
