@@ -1,0 +1,30 @@
+# Contributor: Raph <galaktor(at)gmx.de>
+pkgname=spine
+pkgver=1.0
+pkgrel=1
+pkgdesc="Spine is an animation tool that focuses specifically on 2D animation for games"
+url="http://esotericsoftware.com/spine-in-depth"
+depends=('xorg-server')
+makedepends=()
+conflicts=()
+arch=('x86_64')
+replaces=()
+backup=()
+source=("http://esotericsoftware.com/spine/setup/trial/SpineTrial-64bit.tar.gz"
+	"spine.desktop")
+## skip the md5 for trial archive to allow updated versions
+md5sums=('SKIP'
+	 'SKIP')
+license=('Other' )
+install="spine.install"
+
+package() {
+  ## spine application
+  cd "$srcdir/SpineTrial"
+  install -dv "$pkgdir/usr/local/lib/$pkgname"
+  cp -r "$srcdir/SpineTrial/." "$pkgdir/usr/local/lib/$pkgname"
+
+  ## desktop and icon
+  install -d -m755 $pkgdir/usr/share/applications
+  cp "$srcdir/spine.desktop" "$pkgdir/usr/share/applications"
+}
