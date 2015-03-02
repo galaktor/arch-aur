@@ -1,0 +1,48 @@
+# Contributor: Raph <galaktor(at)gmx.de>
+pkgname=spine
+pkgver=1.0
+pkgrel=1
+pkgdesc="Spine is an animation tool that focuses specifically on 2D animation for games"
+url="http://esotericsoftware.com/spine-in-depth"
+#makedepends=()
+#conflicts=()
+#replaces=()
+#backup=()
+license=("Other")
+install="spine.install"
+depends=('xorg-server')
+arch=('x86_64')
+
+## Defaults to name of full version tarball.
+## Trial tarball is available on the esotericsoftware website
+## download it, and set 'spinetar' to be the name of the archive
+## i.e. for the trial:
+## spinetar=SpineTrial-64bit.tar.gz
+spinetar=Spine-64bit.tar.gz
+
+## Defaults to expect tarball in pkgbuild directory.
+## If the tarball as named in 'spinetar' is not located
+## in the pkgbuid directory, then change the below source to
+## define the location of the tarball you want to extract
+## i.e for the trial:
+## source=("/home/bob/downloads/SpineTrial-64bit.tar.gz" "spine.desktop")
+source=("./$spinetar" "spine.desktop")
+
+## skip the md5 for trial archive to allow updated versions.
+## otherwise we'll have to update the hash all the time.
+md5sums=("SKIP" "SKIP")
+
+## we'll extract this by hand later.
+## this is to normalize the extracted directory name for later steps
+noextract=("$spinetar")
+
+package() {
+  ## make target directory and unpack archive
+  install -dv "$pkgdir/usr/local/lib/$pkgname"
+  bsdtar -zxvf "$srcdir/$spinetar" -C "$pkgdir/usr/local/lib/spine" --strip-components 1
+
+  ## install desktop file and icon
+  install -d -m755 $pkgdir/usr/share/applications
+  cp "$srcdir/spine.desktop" "$pkgdir/usr/share/applications"
+  cp "$srcdir/spine-icon.png" "$pkgdir/usr/local/lib/$pkgname"
+}
