@@ -40,7 +40,7 @@ spinetar=
 
 source=("spine.desktop"
         "spine-icon.png")
-md5sums=("63685c2244ef9ea52ff96b8318f77a6b"  # spine.desktop
+md5sums=("7e4bcecabd27867af73d586d718d2269"  # spine.desktop
          "cd6ad3fde0676bc33faa0e178c18d3c5") # spine-icon.png
 
 check() {
