@@ -75,7 +75,7 @@ package() {
     echo "./SpineTrial.sh"   >> $pkgdir/usr/bin/spine2d-trial
     chmod +x $pkgdir/usr/bin/spine2d-trial
   else
-    echo "WARN: no launch script found in /usr/bin/spine. no symlinks created."
+    echo "WARN: no matching launch script found in /usr/bin/spine. no launch script created."
   fi
 
   echo "INFO: installing desktop file"
