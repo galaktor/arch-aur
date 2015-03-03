@@ -1,0 +1,58 @@
+# contributor: raph <galaktor(at)gmx.de>
+pkgname=spine
+## technically not limited to other versions, but
+## at the time of writing the version was 2.1.13
+pkgver=2.1
+pkgrel=1
+pkgdesc="Spine is an animation tool that focuses specifically on 2D animation for games"
+url="http://esotericsoftware.com/spine-in-depth"
+#makedepends=()
+#conflicts=()
+#replaces=()
+#backup=()
+license=("Other")
+install="spine.install"
+depends=("xorg-server")
+arch=("i686" "x86_64")
+
+####################
+#### 'spinetar' ####
+##
+## Full path to the spine tarball you are installing.
+## Trial tarball is available on the esotericsoftware website.
+## examples, depending on the version and arch you have:
+##
+## Full version (i386)
+##   spinetar=Spine-32bit.tar.gz
+## Full version (x86_64)
+##   spinetar=Spine-64bit.tar.gz
+## Trial version (i686)
+##   spinetar=SpineTrial-32bit.tar.gz
+## Trial version (x86_64)
+##   spinetar=SpineTrial-64bit.tar.gz
+##
+## Note: this is not listed in "source" array since
+## we need to copy it first; makepkg would fail
+## before we can copy it.
+##
+## Default: an imaginary tarball of the x64 trial
+## version residing in raph's "downloads" folder.
+## (Probably wrong, so change it!)
+##
+spinetar=/home/raph/downloads/SpineTrial-64bit.tar.gz
+
+source=("spine.desktop" "spine-icon.png")
+md5sums=("SKIP" "SKIP")
+
+package() {
+  ## make the target directory
+  install -dv "$pkgdir/usr/local/lib/$pkgname"
+
+  ## unpack archive
+  bsdtar -zxvf "$spinetar" -C "$pkgdir/usr/local/lib/spine" --strip-components 1
+
+  ## install desktop file and icon
+  install -d -m755 $pkgdir/usr/share/applications
+  cp "$srcdir/spine.desktop" "$pkgdir/usr/share/applications"
+  cp "$srcdir/spine-icon.png" "$pkgdir/usr/local/lib/$pkgname"
+}
