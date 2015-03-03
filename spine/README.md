@@ -11,10 +11,15 @@ Spine can be downloaded and run in a straight-forward manner without needing an 
 # How to use it
 The PKGBUILD can be built using the makepkg utility on arch linux as documented on the Arch wiki.
 
-## Prerequisites
+## Dependencies
+Spine uses Java, but fear not, it brings it's own JRE with it inside the tarball you download. No need to install java on your system. It does make use of some graphics APIs and requires xorg as well as some opengl. Additional runtimes, projects might have other special requirements. All i focussed on here was installation of the tarball from the website. For questions about dependencies please refer to the esoteric software website and community.
+
+## Prerequisites: spinetar
 The only special part with this PKGBUILD is the 'spinetar' variable, which you *must* set before attempting to build the package.
 
 Only Spine trial builds can be downloaded via public, well-known URLs. Those are of little use to anyone other than people trialing it, since you cannot easily upgrade the installed trial to a pro version. Full version tarballs differ in content and are provided to license owners ONLY via custom download URLs. Therefor this packaging script cannot assume a URL for the tarball other than for the trial builds at the time of writing. As it will be mostly full version owners who are interested in this package (citation needed), I decided to make it mandatory to download the tarball via your custom link and set it's path in the PKGBUILD file using a text editor before attempting to install.
+
+See the PKGBUILD file for details on setting the 'spinetar' variable.
 
 ## Using makepkg
 As documented in the arch wiki, you can use makepkg to create a pacman package from these scripts. The steps are effectively
