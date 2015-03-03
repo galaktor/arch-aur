@@ -2,17 +2,15 @@
 pkgname=spine
 ## technically not limited to other versions, but
 ## at the time of writing the version was 2.1.13
+## spine editor is frequently auto-updated via
+## a built-in update feature.
 pkgver=2.1
 pkgrel=1
 pkgdesc="Spine is an animation tool that focuses specifically on 2D animation for games"
-url="http://esotericsoftware.com/spine-in-depth"
-#makedepends=()
-#conflicts=()
-#replaces=()
-#backup=()
+url="http://www.esotericsoftware.com"
 license=("Other")
 install="spine.install"
-depends=("xorg-server")
+depends=("tar" "xorg-server")
 arch=("i686" "x86_64")
 
 ####################
@@ -35,24 +33,48 @@ arch=("i686" "x86_64")
 ## we need to copy it first; makepkg would fail
 ## before we can copy it.
 ##
-## Default: an imaginary tarball of the x64 trial
+## example: an imaginary tarball of the x64 trial
 ## version residing in raph's "downloads" folder.
-## (Probably wrong, so change it!)
-##
+##   spinetar=/home/raph/downloads/SpineTrial-64bit.tar.gz
 spinetar=/home/raph/downloads/SpineTrial-64bit.tar.gz
 
-source=("spine.desktop" "spine-icon.png")
-md5sums=("SKIP" "SKIP")
+source=("spine.desktop"
+        "spine-icon.png")
+md5sums=("63685c2244ef9ea52ff96b8318f77a6b"  # spine.desktop
+         "cd6ad3fde0676bc33faa0e178c18d3c5") # spine-icon.png
+
+check() {
+  ## make sure 'spinetar' is set
+  if [ -z "$spinetar" ]; then
+    echo "ERROR: 'spinetar' variable not set. edit PKGBUILD then try again."
+    exit -1
+  else
+    echo "INFO: 'spinetar' set to $spinetar"
+  fi
+}
 
 package() {
-  ## make the target directory
-  install -dv "$pkgdir/usr/local/lib/$pkgname"
+  echo "INFO: unpacking archive: $spinetar"
+  install -d "$pkgdir/usr/bin/spine"
+  bsdtar -zxvf "$spinetar" -C "$pkgdir/usr/bin/spine" --strip-components 1
 
-  ## unpack archive
-  bsdtar -zxvf "$spinetar" -C "$pkgdir/usr/local/lib/spine" --strip-components 1
+  ## provide symlink for more convenient executable name
+  echo "INFO: creating launcher symlinks"
+  cd "$pkgdir/usr/bin/spine"
+  if [ -f Spine.sh ]; then
+    echo "INFO: creating symlink: spine -> Spine.sh"
+    ln -s ./Spine.sh spine
+  elif [ -f SpineTrial.sh ]; then
+    echo "INFO: creating symlink: spine-trial -> SpineTrial.sh"
+    ln -s ./SpineTrial.sh spine-trial
+  else
+    echo "WARN: no launch script found in /usr/bin/spine. no symlinks created."
+  fi
 
-  ## install desktop file and icon
+  echo "INFO: installing desktop file"
   install -d -m755 $pkgdir/usr/share/applications
   cp "$srcdir/spine.desktop" "$pkgdir/usr/share/applications"
-  cp "$srcdir/spine-icon.png" "$pkgdir/usr/local/lib/$pkgname"
+
+  echo "INFO: installing spine icon" 
+  cp "$srcdir/spine-icon.png" "$pkgdir/usr/bin/spine"
 }
