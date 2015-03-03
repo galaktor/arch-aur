@@ -6,7 +6,7 @@ pkgname=spine
 ## a built-in update feature. you might have to
 ## configure a proxy; check spine documentation.
 pkgver=2.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Spine is an animation tool that focuses specifically on 2D animation for games"
 url="http://www.esotericsoftware.com"
 license=("Other")
