@@ -4,7 +4,7 @@ This is a package for use on Arch linux to install an existing download of the S
 # What does it do?
 Spine can be downloaded and run in a straight-forward manner without needing an installer at all. This exists purely for convenience and does the following:
  * Unzip the tarball you downloaded from esoteric software (trial or full version)
- * Create a symlink named either 'spine' or 'spine-trial' respectively which allows for convenient launching from the command line
+ * Create a launch script in /usr/bin named either 'spine2d' or 'spine2d-trial' respectively which allows for convenient launching from the command line
  * Add a .desktop file to /usr/share/applications for integration into common desktop environments.
  * Add a simple icon so you can have pretty desktop shortcuts and the likes.
 
@@ -29,7 +29,8 @@ As documented in the arch wiki, you can use makepkg to create a pacman package f
  * edit PKGBUILD and set 'spinevar' variable to the path to your spine tarball (full or trial version, doesn't matter)
  * advanced archers might want to change other things in the script, such as install directories etc.
  * run 'makepkg'
- * install the resulting package (.xz) using pacman (see Arch wiki for details)
+ * install the resulting package (.xz) using pacman ("pacman -U"; see Arch wiki for details)
+ * run with command "spine2d" (full version) or "spine2d-trial" (trial version)
 
 ## Using yaourt
 Yaourt is a popular frontend to install this type of package. It basically does the above but through a slightly more comfortable interface (arguably).
