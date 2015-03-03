@@ -3,14 +3,15 @@ pkgname=spine
 ## technically not limited to other versions, but
 ## at the time of writing the version was 2.1.13
 ## spine editor is frequently auto-updated via
-## a built-in update feature.
+## a built-in update feature. you might have to
+## configure a proxy; check spine documentation.
 pkgver=2.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Spine is an animation tool that focuses specifically on 2D animation for games"
 url="http://www.esotericsoftware.com"
 license=("Other")
 install="spine.install"
-depends=("tar" "xorg-server")
+depends=("xorg-server")
 arch=("i686" "x86_64")
 
 ####################
@@ -36,7 +37,7 @@ arch=("i686" "x86_64")
 ## example: an imaginary tarball of the x64 trial
 ## version residing in raph's "downloads" folder.
 ##   spinetar=/home/raph/downloads/SpineTrial-64bit.tar.gz
-spinetar=/home/raph/downloads/SpineTrial-64bit.tar.gz
+spinetar=
 
 source=("spine.desktop"
         "spine-icon.png")
