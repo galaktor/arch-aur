@@ -36,7 +36,7 @@ arch=("i686" "x86_64")
 ## example: an imaginary tarball of the x64 trial
 ## version residing in raph's "downloads" folder.
 ##   spinetar=/home/raph/downloads/SpineTrial-64bit.tar.gz
-spinetar=/home/raph/downloads/SpineTrial-64bit.tar.gz
+spinetar=
 
 source=("spine.desktop"
         "spine-icon.png")
