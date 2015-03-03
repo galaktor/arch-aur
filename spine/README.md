@@ -26,7 +26,7 @@ As documented in the arch wiki, you can use makepkg to create a pacman package f
  * download spine for linux and your architecture (32/64 bits)
   * either full version via your license email *or* trial version from the spine website
  * download these scripts somewhere on your system
- * edit PKGBUILD and set 'spinevar' variable to the path to your spine tarball (full or trial version, doesn't matter)
+ * edit PKGBUILD and set 'spinetar' variable to the path to your spine tarball (full or trial version, doesn't matter)
  * advanced archers might want to change other things in the script, such as install directories etc.
  * run 'makepkg'
  * install the resulting package (.xz) using pacman ("pacman -U"; see Arch wiki for details)
@@ -35,7 +35,7 @@ As documented in the arch wiki, you can use makepkg to create a pacman package f
 ## Using yaourt
 Yaourt is a popular frontend to install this type of package. It basically does the above but through a slightly more comfortable interface (arguably).
 
-This script works just fine through yaourt but remember to edit the PKGBUILD file when prompted and to set the 'spinevar' variable as described above. The packaging step will fail otherwise.
+This script works just fine through yaourt but remember to edit the PKGBUILD file when prompted and to set the 'spinetar' variable as described above. The packaging step will fail otherwise.
 
 # License
 The source for this installer is licensed as described in LICENSE, but keep in mind that Spine is proprietary software owned by esoteric software and is licensed completely on it's own, under it's own conditions etc.
