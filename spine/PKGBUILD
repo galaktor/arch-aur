@@ -36,7 +36,7 @@ arch=("i686" "x86_64")
 ## example: an imaginary tarball of the x64 trial
 ## version residing in raph's "downloads" folder.
 ##   spinetar=/home/raph/downloads/SpineTrial-64bit.tar.gz
-spinetar=
+spinetar=/home/raph/downloads/SpineTrial-64bit.tar.gz
 
 source=("spine.desktop"
         "spine-icon.png")
@@ -58,15 +58,21 @@ package() {
   install -d "$pkgdir/usr/bin/spine"
   bsdtar -zxvf "$spinetar" -C "$pkgdir/usr/bin/spine" --strip-components 1
 
-  ## provide symlink for more convenient executable name
-  echo "INFO: creating launcher symlinks"
-  cd "$pkgdir/usr/bin/spine"
-  if [ -f Spine.sh ]; then
-    echo "INFO: creating symlink: spine -> Spine.sh"
-    ln -s ./Spine.sh spine
-  elif [ -f SpineTrial.sh ]; then
-    echo "INFO: creating symlink: spine-trial -> SpineTrial.sh"
-    ln -s ./SpineTrial.sh spine-trial
+  ## provide launch script for more convenient executable name
+  echo "INFO: creating launcher script in /usr/bin"
+  cd $pkgdir/usr/bin
+  if [ -f spine/Spine.sh ]; then
+    echo "INFO: creating: /usr/bin/spine2d"
+    echo "#!/bin/bash"        > $pkgdir/usr/bin/spine2d
+    echo "cd /usr/bin/spine" >> $pkgdir/usr/bin/spine2d
+    echo "./Spine.sh"        >> $pkgdir/usr/bin/spine2d
+    chmod +x $pkgdir/usr/bin/spine2d
+  elif [ -f spine/SpineTrial.sh ]; then
+    echo "INFO: creating: /usr/bin/spine2d-trial"
+    echo "#!/bin/bash"        > $pkgdir/usr/bin/spine2d-trial
+    echo "cd /usr/bin/spine" >> $pkgdir/usr/bin/spine2d-trial
+    echo "./SpineTrial.sh"   >> $pkgdir/usr/bin/spine2d-trial
+    chmod +x $pkgdir/usr/bin/spine2d-trial
   else
     echo "WARN: no launch script found in /usr/bin/spine. no symlinks created."
   fi
